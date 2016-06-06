@@ -36,7 +36,7 @@
 | 4 | 06/20/16  | 06/26/16  | Crawl app detail page (2) + Crawl "more" page of the list (1)|
 | 5 | 06/27/16  | 07/02/16  | Crawl "more" page of the list (2) + pipeline into MongoDB|
 | 3 | 07/03/16  | 07/09/16  | Readme writup + frontend display  |
-| 3 | 02/25/16  | 02/29/16  | User Manual Writing and Presentation Making  |
+| 3 | 07/10/16  | 07/16/16  | User Manual Writing and Presentation Making  |
 
 >Office timeline: 
 >* 第二周（6月7日－6月13日）第一次团队会议，以及前期准备
@@ -55,14 +55,14 @@
  - [Multithreading Concurrence](https://www.bittiger.io/videos/aR2v6cezXGMwT442N/TpxCSKrGpiKwuhP32)
  - [Distributed Crawler](https://www.bittiger.io/videos/9AzCHswk4GeABWzoJ/TpxCSKrGpiKwuhP32)
 - [Jing's crawler repo](https://github.com/BitTigerInst/Kumamon) 
--  
+  
 
 ## License
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 
 ## Project Information
 - category: full stack
-- team: 
+- team: HealthyGrain
 - description: One sentence description for your awesome project.
 - stack: Scrapy, ScrapyJS,Splash, MongoDB
 
