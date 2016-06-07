@@ -1,6 +1,10 @@
 # HealthyWebCrawler-T14
-* Team Slack: 
-* Team Trello: 
+* Team Slack: https://scrapy201606-14.slack.com
+* Team Trello: https://trello.com/b/w3nYXv31/scrapy-team-14-sprint-1
+* Project link: https://www.bittiger.io/microproject/oYDSG6MSFihpiNJ66
+* Templates
+  * proposal: https://github.com/hackjustu/Handbook-Github-Projects
+  * readme example: https://github.com/hackjustu/Github-Ranking-FrontEnd
 
 ## Description
 * Create a Scrapy project to crawl the content in the Xiaomi Appstore homepage (http://app.mi.com/)
@@ -10,21 +14,44 @@
 ## Plan
 
 ### Todo List
+- [ ] Enviroment Setup 
+  - [ ] Scrapy
+  - [ ] pymongo
+  - [ ] ScrapyJS
+  - [ ] Splash
 - [ ] Crawl list page
-  - [ ] list page html breakdown  
-  - [ ] disctinguish sections
-  - [ ] decide tags to grap 
+  - [ ] List page html breakdown  
+  - [ ] Disctinguish sections
+  - [ ] Parse the page (beautifulsoup,xpath etc.)
+  - [ ] Decide info/tags to grap
+  - [ ] Divide category so that teammates can crawl different categories in parellel
+  - [ ] Multiple IP + sleep time 
 - [ ] Crawl app detail page
+  - [ ] How link from the list page
+  - [ ] What contents to crawl
+  - [ ] Data structure to save to MongoDB
 - [ ] Crawl "more" page of the list 
   - [ ] Splash + ScrapyJS if page link is written in Javascript
+  - [ ] Loop to read many pages 
+  - [ ] Corner case 1: first page
+  - [ ] Corner case 2: last page
 - [ ] Pipeline for outputing to MongoDB while crawling
-- [ ] Display raw results (front end)
-- [ ] More summerized results (recommender)
+  - [ ] MongoDB basics
+  - [ ] Items to store
+  - [ ] Data Structure
+  - [ ] When and how to write to MongoDB
+- [ ] Display raw results
+  - [ ] What to display
+  - [ ] which front end tool to use
+- [ ] More summerized results 
   - [ ] Top lists
-  - [ ] 精品推荐
-  - [ ] 热门应用
-  - [ ] More ideas
-  
+  - [ ] 精品推荐 (recommender)
+  - [ ] 热门应用 (?) 
+  - [ ] More ideas if time allows
+- [ ] README writeup
+- [ ] demo making
+  - [ ] GIF format: how?
+  - [ ] Demo: firebaseapp.com (host) 
 
 ### Time Schedule
 
@@ -36,7 +63,7 @@
 | 4 | 06/20/16  | 06/26/16  | Crawl app detail page (2) + Crawl "more" page of the list (1)|
 | 5 | 06/27/16  | 07/02/16  | Crawl "more" page of the list (2) + pipeline into MongoDB|
 | 3 | 07/03/16  | 07/09/16  | Readme writup + frontend display  |
-| 3 | 07/10/16  | 07/16/16  | User Manual Writing and Presentation Making  |
+| 3 | 07/10/16  | 07/16/16  | User Manual(README) Writing and Presentation(demo) Making  |
 
 >Office timeline: 
 >* 第二周（6月7日－6月13日）第一次团队会议，以及前期准备
@@ -64,7 +91,7 @@ See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 - category: full stack
 - team: HealthyGrain
 - description: One sentence description for your awesome project.
-- stack: Scrapy, ScrapyJS,Splash, MongoDB
+- stack: scrapy, scrapyjs,splash, mongodb, javascript, python
 
 > **Note:** 我们使用[爬虫](https://github.com/hackjustu/Project-Markdown-Table-Generator)爬取 `Project Information` 部分的内容并生成项目统计数据。为了方便系统识别，建议`category`和`stack`部分使用下面列举的选项。 如果发现需要别的选项不在列表中，请和我们联系^^
 >
