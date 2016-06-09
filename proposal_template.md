@@ -1,6 +1,6 @@
 # HealthyWebCrawler-T14
 * Team Slack: https://scrapy201606-14.slack.com
-* Team Trello: https://trello.com/b/w3nYXv31/scrapy-team-14-sprint-1
+* Team Taiga: https://tree.taiga.io/project/evahhh-healthywebcrawler-t14/kanban
 * Project link: https://www.bittiger.io/microproject/oYDSG6MSFihpiNJ66
 * Templates
   * proposal: https://github.com/hackjustu/Handbook-Github-Projects
@@ -14,20 +14,22 @@
 ## Plan
 
 ### Todo List
-- [ ] Enviroment Setup 
-  - [ ] Scrapy
-  - [ ] pymongo
-  - [ ] ScrapyJS
-  - [ ] Splash
+- [ ] Enviroment Setup (python 2.7.10)
+  - [x] Scrapy ([Installation](http://doc.scrapy.org/en/latest/intro/install.html))  
+  - [ ] MongoDB ([Mac](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/), [Linux](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)) 
+  - [ ] pymongo ([Installation](https://api.mongodb.com/python/current/installation.html)) 
+  - [ ] ScrapyJS (A Scrapy Plug-in, [Installation](https://github.com/scrapy-plugins/scrapy-splash))  
+  - [ ] Splash 
 - [ ] Crawl list page
-  - [ ] List page html breakdown  
-  - [ ] Disctinguish sections
+  - [x] List page html breakdown  
+  - [x] Disctinguish sections
+  - [ ] Identify the link to detail content
+  - [x] Identify the link to next page
   - [ ] Parse the page (beautifulsoup,xpath etc.)
   - [ ] Decide info/tags to grap
-  - [ ] Divide category so that teammates can crawl different categories in parellel
-  - [ ] Multiple IP + sleep time 
+  - [ ] Crawl sub-categories in parellel
 - [ ] Crawl app detail page
-  - [ ] How link from the list page
+  - [ ] How to link from and link back to the list page
   - [ ] What contents to crawl
   - [ ] Data structure to save to MongoDB
 - [ ] Crawl "more" page of the list 
@@ -35,6 +37,7 @@
   - [ ] Loop to read many pages 
   - [ ] Corner case 1: first page
   - [ ] Corner case 2: last page
+  - [ ] Multiple IP + sleep time 
 - [ ] Pipeline for outputing to MongoDB while crawling
   - [ ] MongoDB basics
   - [ ] Items to store
@@ -46,7 +49,6 @@
 - [ ] More summerized results 
   - [ ] Top lists
   - [ ] 精品推荐 (recommender)
-  - [ ] 热门应用 (?) 
   - [ ] More ideas if time allows
 - [ ] README writeup
 - [ ] demo making
@@ -62,8 +64,8 @@
 | 3 | 06/13/16  | 06/19/16  | Crawl list page summary (2) + Crawl app detail page (1)|
 | 4 | 06/20/16  | 06/26/16  | Crawl app detail page (2) + Crawl "more" page of the list (1)|
 | 5 | 06/27/16  | 07/02/16  | Crawl "more" page of the list (2) + pipeline into MongoDB|
-| 3 | 07/03/16  | 07/09/16  | Readme writup + frontend display  |
-| 3 | 07/10/16  | 07/16/16  | User Manual(README) Writing and Presentation(demo) Making  |
+| 6 | 07/03/16  | 07/09/16  | Readme writup + frontend display  |
+| 7 | 07/10/16  | 07/16/16  | User Manual(README) Writing and Presentation(demo) Making  |
 
 >Office timeline: 
 >* 第二周（6月7日－6月13日）第一次团队会议，以及前期准备
