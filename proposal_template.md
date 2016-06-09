@@ -20,7 +20,7 @@
   - [ ] pymongo ([Installation](https://api.mongodb.com/python/current/installation.html)) 
   - [ ] ScrapyJS (A Scrapy Plug-in, [Installation](https://github.com/scrapy-plugins/scrapy-splash))  
   - [ ] Splash 
-- [ ] Crawl list page
+- [ ] Crawl list page (http://app.mi.com/topList) 
   - [x] List page html breakdown  
   - [x] Disctinguish sections
   - [ ] Identify the link to detail content
@@ -28,11 +28,11 @@
   - [ ] Parse the page (beautifulsoup,xpath etc.)
   - [ ] Decide info/tags to grap
   - [ ] Crawl sub-categories in parellel
-- [ ] Crawl app detail page
+- [ ] Crawl app detail page (eg. http://app.mi.com/detail/108048) 
   - [ ] How to link from and link back to the list page
   - [ ] What contents to crawl
   - [ ] Data structure to save to MongoDB
-- [ ] Crawl "more" page of the list 
+- [ ] Crawl "more" page of the list (eg. http://app.mi.com/topList?page=2) 
   - [ ] Splash + ScrapyJS if page link is written in Javascript
   - [ ] Loop to read many pages 
   - [ ] Corner case 1: first page
