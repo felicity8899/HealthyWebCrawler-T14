@@ -12,8 +12,8 @@
 - License
 - Project Information
 
-### Template
-- [proposal_template](./proposal_template.md)
+### Done
+- [proposal](./Proposal.md)
 
 ## 2. Readme
 ### When
