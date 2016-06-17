@@ -65,12 +65,46 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'xiaomiapp.pipelines.XiaomiMongoDBPipeline': 300,
+    #'xiaomiapp.pipelines.XiaomiMongoDBPipeline': 300,
+    'xiaomiapp.pipelines.XiaomiSolrPipeline': 500,
+    # 'xiaomiapp.pipelines.XiaomiElasticSearchPipeline': 100,
 }
+
+# MONGODB settings
 MONGODB_SERVER = "localhost"
 MONGODB_PORT = 27017
 MONGODB_DB = "xiaomiapp"
 MONGODB_COLLECTION = "applists"
+
+# ELASTICSEARCH settings
+# ELASTICSEARCH_SERVERS = ['localhost']
+ELASTICSEARCH_SERVER = 'localhost'
+ELASTICSEARCH_PORT = 9200
+# ELASTICSEARCH_USERNAME = ''
+# ELASTICSEARCH_PASSWORD = ''
+ELASTICSEARCH_INDEX = 'scrapy'
+ELASTICSEARCH_INDEX_DATE_FORMAT = '%Y-%m'
+ELASTICSEARCH_TYPE = 'items'
+# ELASTICSEARCH_BUFFER_LENGTH = 500
+# ELASTICSEARCH_UNIQ_KEY = 'appid' # Custom uniqe key
+
+# SOLR settings
+SOLR_URL = 'http://localhost:8983/solr/scrapy'
+SOLR_MAPPING = {
+  'title': 'title',
+  'appid': 'appid',
+  'category': 'category',
+  'groupid': 'groupid',
+  'developer': 'developer',
+  'rating': 'rating',
+  'count': 'count',
+  'version': 'version',
+  'update_time': 'update_time',
+  'developer_recommended': 'developer_recommended',
+  'related_recommended': 'related_recommended'
+}
+SOLR_IGNORE_DUPLICATES = True
+SOLR_DUPLICATES_KEY_FIELDS = ['appid']
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

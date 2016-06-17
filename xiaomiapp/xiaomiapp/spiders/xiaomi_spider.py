@@ -39,12 +39,12 @@ class XiaomiSpider(Spider):
 
         for l in page_list:
             item = XiaomiAppItem()
-            item['title'] = l.xpath('./h5/a/text()').extract_first().encode('utf-8')
+            item['title'] = l.xpath('./h5/a/text()').extract_first()#.encode('utf-8')
             url = l.xpath('./h5/a/@href').extract_first()
             appid = re.match(r'/detail/(\d+)', url).group(1)
             item['appid'] = appid
 
-            item['category'] = l.xpath('./p/a/text()').extract_first().encode('utf-8')
+            item['category'] = l.xpath('./p/a/text()').extract_first()#.encode('utf-8')
             url_c = l.xpath('./p/a/@href').extract_first()
             groupid = re.match(r'/category/(.*)', url_c).group(1)
             item['groupid'] = groupid
@@ -114,7 +114,7 @@ class XiaomiSpider(Spider):
 
         page_list = page.xpath('//div[@class="intro-titles"]')
         for l in page_list:
-            item['developer'] = l.xpath('./p/text()').extract_first().encode('utf-8')
+            item['developer'] = l.xpath('./p/text()').extract_first()#.encode('utf-8')
             # print item['developer']
 
         rating_list = page.xpath('//div[@class="star1-empty"]')
@@ -137,8 +137,8 @@ class XiaomiSpider(Spider):
         # item["recommended"] = recommended
         item['developer_recommended'] = developer_recommended
         item['related_recommended'] = related_recommended
-        print item['developer_recommended']
-        print item['related_recommended']
+        # print item['developer_recommended']
+        # print item['related_recommended']
         print item['title']
 
         yield item
