@@ -65,9 +65,9 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    #'xiaomiapp.pipelines.XiaomiMongoDBPipeline': 300,
+    'xiaomiapp.pipelines.XiaomiMongoDBPipeline': 300,
     'xiaomiapp.pipelines.XiaomiSolrPipeline': 500,
-    # 'xiaomiapp.pipelines.XiaomiElasticSearchPipeline': 100,
+    'xiaomiapp.pipelines.XiaomiElasticSearchPipeline': 100,
 }
 
 # MONGODB settings
