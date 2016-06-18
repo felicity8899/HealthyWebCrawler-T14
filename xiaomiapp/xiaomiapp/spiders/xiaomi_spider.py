@@ -8,6 +8,9 @@ import re
 from scrapy.selector import Selector
 from xiaomiapp.items import XiaomiAppItem
 
+# from scrapy.shell import inspect_response
+# from scrapy.utils.response import open_in_browser
+
 class XiaomiSpider(Spider):
     name = "xiaomi"
     allowed_domain = ["app.mi.com"]
@@ -27,6 +30,8 @@ class XiaomiSpider(Spider):
 
         # print page_list[-2]
         # print type(page_list[-2].xpath('text()').extract_first())
+        # inspect_response(response, self)
+        # open_in_browser(response)
 
     def parse_page(self, response):
         page = Selector(response)
