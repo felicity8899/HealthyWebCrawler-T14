@@ -66,8 +66,8 @@ ROBOTSTXT_OBEY = True
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'xiaomiapp.pipelines.XiaomiMongoDBPipeline': 300,
-    'xiaomiapp.pipelines.XiaomiSolrPipeline': 500,
-    'xiaomiapp.pipelines.XiaomiElasticSearchPipeline': 100,
+    # 'xiaomiapp.pipelines.XiaomiSolrPipeline': 500,
+    # 'xiaomiapp.pipelines.XiaomiElasticSearchPipeline': 100,
 }
 
 # MONGODB settings
@@ -75,6 +75,7 @@ MONGODB_SERVER = "localhost"
 MONGODB_PORT = 27017
 MONGODB_DB = "xiaomiapp"
 MONGODB_COLLECTION = "applists"
+MONGODB_UNIQUE_KEY = "appid"
 
 # ELASTICSEARCH settings
 # ELASTICSEARCH_SERVERS = ['localhost']
