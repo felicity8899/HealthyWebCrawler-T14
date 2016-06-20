@@ -12,6 +12,7 @@ class XiaomiAppItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     # pass
+    appurl = scrapy.Field()
     title = scrapy.Field()
     appid = scrapy.Field()
     category = scrapy.Field()

@@ -56,12 +56,16 @@ class XiaomiSpider(Spider):
             item['groupid'] = groupid
 
             req = scrapy.Request(url_base + url, callback=self.parse_details)
+            appurl = url_base + url
+            item['appurl'] = appurl
+            # print appurl
             req.meta["item"] = item
             yield req
 
             # print url
             # print appid
             # print groupid
+            
     def parse_details(self, response):
         item = response.meta["item"]
         page = Selector(response)
@@ -89,7 +93,7 @@ class XiaomiSpider(Spider):
                 url = l.xpath('./a/@href').extract_first()
                 appid = re.match(r'/detail/(\d+)', url).group(1)
                 related_recommended.append(appid)
-        elif app_text.__len__() < 3: #recommended_type ==
+        elif app_text.__len__() < 3: # recommended_type ==
             pass
         else:
             recommended_type = app_text[2].encode('utf-8')
@@ -145,6 +149,6 @@ class XiaomiSpider(Spider):
         item['related_recommended'] = related_recommended
         # print item['developer_recommended']
         # print item['related_recommended']
-        print item['title']
+        # print item['title']
 
         yield item

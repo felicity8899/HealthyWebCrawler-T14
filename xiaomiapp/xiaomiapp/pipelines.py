@@ -35,6 +35,7 @@ class XiaomiElasticSearchPipeline(object):
         self.settings = settings
         uri = "{}:{}".format(self.settings['ELASTICSEARCH_SERVER'], self.settings['ELASTICSEARCH_PORT'])
         self.es = Elasticsearch([uri])
+
         # uri = "%s:%d" % (self.settings['ELASTICSEARCH_SERVER'], self.settings['ELASTICSEARCH_PORT'])
         # self.es = Elasticsearch(, serializer=JSONSerializerPython2())
         # print uri
@@ -69,12 +70,11 @@ class XiaomiElasticSearchPipeline(object):
         if isinstance(item, types.GeneratorType) or isinstance(item, types.ListType):
             for each in item:
                 self.process_item(each, spider)
-
         else:
             self.index_item(item)
         # index_name = self.settings['ELASTICSEARCH_INDEX']
         # self.es.index(dict(item), index_name, self.settings['ELASTICSEARCH_TYPE'], op_type='create')
-        # self.es.index(index_name, doc_type="document", body=dict(item), op_type='create')
+        self.es.delete(self.settings['ELASTICSEARCH_INDEX'], self.settings['ELASTICSEARCH_TYPE'], id=item['appid'])
         self.es.index(self.settings['ELASTICSEARCH_INDEX'], self.settings['ELASTICSEARCH_TYPE'], dict(item), id=item['appid'], op_type='create', )
         # self.es.index()
         return item
@@ -92,6 +92,8 @@ class XiaomiSolrPipeline(object):
             raise RuntimeError('SOLR_DUPLICATES_KEY_FIELDS has to be defined')
         self.solr = pysolr.Solr(settings['SOLR_URL'], timeout=10)
 
+        # self.solr.delete(q='*:*')
+
         # print settings['SOLR_MAPPING']
 
     def process_item(self, item, spider):
@@ -99,25 +101,30 @@ class XiaomiSolrPipeline(object):
             duplicates = [str(name) + ':' + '"' + self.get_value(item, value) + '"' for name, value in self.mapping if name in self.keys]
             query = " ".join(duplicates)
             result = self.solr.search(query)
+            print query
             print result
             # result = None
             if result:
-                logging.info("Skip duplicates")
-                return item
-            results = {}
-            for name, value in self.mapping:
-                results[name] = self.get_value(item, value)
+                logging.info("Skip duplicates in Solr")
+                # return item
+                self.solr.delete(q=query)
+                # self.solr.delete(q='*:*')
+                # print type(self.keys)
+        results = {}
+        for name, value in self.mapping:
+            results[name] = self.get_value(item, value)
 
-            self.solr.add([results])
-            # print self.solr.search(q=query)
-            # print self.solr.add([{'bananas': '1'}])
-            print duplicates
-            print query
-            # print results
-            # flag = 'appid' in item
-            # print flag
-            # print type(item)
-            return item
+        # self.solr.delete()
+        self.solr.add([results])
+        # print self.solr.search(q=query)
+        # print self.solr.add([{'bananas': '1'}])
+        # print duplicates
+        # print query
+        # print results
+        # flag = 'appid' in item
+        # print flag
+        # print type(item)
+        return item
 
     def get_value(self, item, value):
         if type(value) is str:
@@ -136,6 +143,7 @@ class XiaomiMongoDBPipeline(object):
         db = connection[settings['MONGODB_DB']]
         self.collection = db[settings['MONGODB_COLLECTION']]
         self.key = settings['MONGODB_UNIQUE_KEY']
+        # self.collection.drop()
 
     def process_item(self, item, spider):
         valid = True
@@ -153,8 +161,10 @@ class XiaomiMongoDBPipeline(object):
             # print search_result
             if search_result:
                 logging.info("Skip duplicates")
-                return item
-            else:
+            #    return item
+            # else:
+            # if True:
+                self.collection.delete_one(result)
                 self.collection.insert(dict(item))
                 log.msg("Item added to MongoDB database!",
                         level=log.DEBUG, spider=spider)

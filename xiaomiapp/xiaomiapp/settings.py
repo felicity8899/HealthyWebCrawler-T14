@@ -66,7 +66,7 @@ ROBOTSTXT_OBEY = True
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'xiaomiapp.pipelines.XiaomiMongoDBPipeline': 300,
-    'xiaomiapp.pipelines.XiaomiSolrPipeline': 500,
+    'xiaomiapp.pipelines.XiaomiSolrPipeline': 200,
     'xiaomiapp.pipelines.XiaomiElasticSearchPipeline': 100,
 }
 
@@ -90,8 +90,10 @@ ELASTICSEARCH_TYPE = 'items'
 # ELASTICSEARCH_UNIQ_KEY = 'appid' # Custom uniqe key
 
 # SOLR settings
-SOLR_URL = 'http://localhost:8983/solr/scrapy'
+# SOLR_URL = 'http://localhost:8983/solr/scrapy'
+SOLR_URL = 'http://localhost:8983/solr/test'
 SOLR_MAPPING = {
+  'appurl': 'appurl',
   'title': 'title',
   'appid': 'appid',
   'category': 'category',
