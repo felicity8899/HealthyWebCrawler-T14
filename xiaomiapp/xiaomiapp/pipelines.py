@@ -74,6 +74,7 @@ class XiaomiElasticSearchPipeline(object):
             self.index_item(item)
         # index_name = self.settings['ELASTICSEARCH_INDEX']
         # self.es.index(dict(item), index_name, self.settings['ELASTICSEARCH_TYPE'], op_type='create')
+        logging.info("Remove old values in Elasticsearch if exit")
         self.es.delete(self.settings['ELASTICSEARCH_INDEX'], self.settings['ELASTICSEARCH_TYPE'], id=item['appid'])
         self.es.index(self.settings['ELASTICSEARCH_INDEX'], self.settings['ELASTICSEARCH_TYPE'], dict(item), id=item['appid'], op_type='create', )
         # self.es.index()
@@ -105,8 +106,9 @@ class XiaomiSolrPipeline(object):
             print result
             # result = None
             if result:
-                logging.info("Skip duplicates in Solr")
+                # logging.info("Skip duplicates in Solr")
                 # return item
+                logging.info("Remove old values in Solr")
                 self.solr.delete(q=query)
                 # self.solr.delete(q='*:*')
                 # print type(self.keys)
@@ -160,15 +162,18 @@ class XiaomiMongoDBPipeline(object):
             search_result = self.collection.find_one(result)
             # print search_result
             if search_result:
-                logging.info("Skip duplicates")
+            #    logging.info("Skip duplicates")
             #    return item
             # else:
             # if True:
+                logging.info("Remove old values in MongoDB")
                 self.collection.delete_one(result)
-                self.collection.insert(dict(item))
-                log.msg("Item added to MongoDB database!",
-                        level=log.DEBUG, spider=spider)
-                return item
+
+            self.collection.insert(dict(item))
+            # logging.info("Item added to MongoDB database!")
+            log.msg("Item added to MongoDB database!",
+                    level=log.DEBUG, spider=spider)
+            return item
 
     def __get_itemvalue__(self, item, value):
         if type(value) is str:

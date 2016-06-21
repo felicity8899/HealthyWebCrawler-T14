@@ -90,8 +90,7 @@ ELASTICSEARCH_TYPE = 'items'
 # ELASTICSEARCH_UNIQ_KEY = 'appid' # Custom uniqe key
 
 # SOLR settings
-# SOLR_URL = 'http://localhost:8983/solr/scrapy'
-SOLR_URL = 'http://localhost:8983/solr/test'
+SOLR_URL = 'http://localhost:8983/solr/scrapy'
 SOLR_MAPPING = {
   'appurl': 'appurl',
   'title': 'title',
