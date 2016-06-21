@@ -32,8 +32,14 @@ class XiaomiAppstoreCrawlerPipeline(object):
                 valid = False
                 raise DropItem("Missing {0}!".format(data))
         if valid:
-            self.collection.insert(dict(item))
-            log.msg("new app added to MongoDB database!",
-                    level=log.DEBUG, spider=spider)
+            query = {}
+            query[self.key] = item[self.key]
+            search_result = self.collection.find_one(query)
+            if not search_result:
+                self.collection.insert(dict(item))
+                log.msg("new app added to MongoDB database!",
+                        level=log.DEBUG, spider=spider)
+            else:
+                self.collection.update(query, dict(item))
 
         return item

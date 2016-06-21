@@ -65,13 +65,14 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'crawler.pipelines.XiaomiappPipeline': 300,
+    'crawler.pipelines.XiaomiAppstoreCrawlerPipeline': 300,
 }
 
 MONGODB_SERVER = "localhost"
 MONGODB_PORT = 27017
 MONGODB_DB = "scrapy"
 MONGODB_COLLECTION = "xiaomiapp"
+MONGODB_UNIQUE_KEY = "appid"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

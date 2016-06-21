@@ -29,12 +29,9 @@ class TopListSpider(scrapy.Spider):
             if not a_tag:
                 continue
 
-            app_name = re.match(r'.*', a_tag.string).group()
+            #app_name = re.match(r'.*', a_tag.string).group()
             url = a_tag["href"]
-            app_id = (re.match(r'/detail/(\d+)', url)).group(1)
-            #item['appid'] = app_id
-            #item['title'] = app_name
-            #item['appurl'] = url
+            #app_id = (re.match(r'/detail/(\d+)', url)).group(1)
             
             req = scrapy.Request(common_url + url, callback=self.parse_details)
             req.meta["item"] = item
@@ -110,8 +107,6 @@ class TopListSpider(scrapy.Spider):
                         recommended_dev_app.append(app_id)
                     else:
                         recommended_app.append(app_id)
-        else:
-            pass
 
         item['developerrec'] = recommended_dev_app
         item['relatedrec'] = recommended_app
