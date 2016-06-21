@@ -69,12 +69,12 @@ class XiaomiSpider(Spider):
     def parse_details(self, response):
         item = response.meta["item"]
         page = Selector(response)
-        #page_list = page.xpath('//div[@class="second-imgbox"]/ul/li')
+        # page_list = page.xpath('//div[@class="second-imgbox"]/ul/li')
 
         page_list = page.xpath('//div[@class="second-imgbox"]')
         app_text = page.xpath('//div[@class="app-text"]/h3/text()').extract()
-        #recommended_type = app_text[2].encode('utf-8')
-        #print type(recommended_type)
+        # recommended_type = app_text[2].encode('utf-8')
+        # print type(recommended_type)
 
 
         developer_recommended = []
@@ -114,8 +114,8 @@ class XiaomiSpider(Spider):
                     related_recommended.append(appid)
 
 
-        #recommended = []
-        #for l in page_list:
+        # recommended = []
+        # for l in page_list:
             # url = l.xpath('./a/@href').extract_first()
             # appid = re.match(r'/detail/(\d+)', url).group(1)
             # recommended.append(appid)
