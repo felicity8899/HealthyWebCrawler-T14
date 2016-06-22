@@ -10,9 +10,9 @@ from elasticsearch import Elasticsearch, helpers
 # from elasticsearch import Elasticsearch, RequestsHttpConnection, serializer, compat, exceptions, helpers
 from scrapy.utils.project import get_project_settings
 
-from scrapy.conf import settings
+# from scrapy.conf import settings
 from scrapy.exceptions import DropItem
-from scrapy import log
+# from scrapy import log
 
 from datetime import datetime
 import types
@@ -31,8 +31,9 @@ class XiaomiElasticSearchPipeline(object):
     items_buffer = []
 
     def __init__(self):
-        # self.settings = get_project_settings()
-        self.settings = settings
+        self.settings = get_project_settings()
+        # settings = get_project_settings()
+        # self.settings = settings
         uri = "{}:{}".format(self.settings['ELASTICSEARCH_SERVER'], self.settings['ELASTICSEARCH_PORT'])
         self.es = Elasticsearch([uri])
 
@@ -40,8 +41,9 @@ class XiaomiElasticSearchPipeline(object):
         # self.es = Elasticsearch(, serializer=JSONSerializerPython2())
         # print uri
 
-    def index_item(self, item):
+        # print type(settings)
 
+    def index_item(self, item):
         index_name = self.settings['ELASTICSEARCH_INDEX']
         index_suffix_format = self.settings.get('ELASTICSEARCH_INDEX_DATE_FORMAT', None)
 
@@ -75,7 +77,7 @@ class XiaomiElasticSearchPipeline(object):
         # index_name = self.settings['ELASTICSEARCH_INDEX']
         # self.es.index(dict(item), index_name, self.settings['ELASTICSEARCH_TYPE'], op_type='create')
         logging.info("Remove old values in Elasticsearch if exit")
-        self.es.delete(self.settings['ELASTICSEARCH_INDEX'], self.settings['ELASTICSEARCH_TYPE'], id=item['appid'])
+        self.es.delete(self.settings['ELASTICSEARCH_INDEX'], self.settings['ELASTICSEARCH_TYPE'], id=item['appid'], ignore=[400, 404])
         self.es.index(self.settings['ELASTICSEARCH_INDEX'], self.settings['ELASTICSEARCH_TYPE'], dict(item), id=item['appid'], op_type='create', )
         # self.es.index()
         return item
@@ -86,6 +88,7 @@ class XiaomiElasticSearchPipeline(object):
 
 class XiaomiSolrPipeline(object):
     def __init__(self):
+        settings = get_project_settings()
         self.mapping = settings['SOLR_MAPPING'].items()
         self.ignore = settings['SOLR_IGNORE_DUPLICATES'] or False
         self.keys = settings['SOLR_DUPLICATES_KEY_FIELDS']
@@ -138,6 +141,7 @@ class XiaomiSolrPipeline(object):
 
 class XiaomiMongoDBPipeline(object):
     def __init__(self):
+        settings = get_project_settings()
         connection = pymongo.MongoClient(
             settings['MONGODB_SERVER'],
             settings['MONGODB_PORT']
@@ -171,8 +175,9 @@ class XiaomiMongoDBPipeline(object):
 
             self.collection.insert(dict(item))
             # logging.info("Item added to MongoDB database!")
-            log.msg("Item added to MongoDB database!",
-                    level=log.DEBUG, spider=spider)
+            # log.msg("Item added to MongoDB database!",
+            #        level=log.DEBUG, spider=spider)
+            logging.debug("Item added to MongoDB database!")
             return item
 
     def __get_itemvalue__(self, item, value):

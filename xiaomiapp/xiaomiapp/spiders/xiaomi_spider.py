@@ -53,7 +53,8 @@ class XiaomiSpider(Spider):
             item['category'] = l.xpath('./p/a/text()').extract_first()#.encode('utf-8')
             url_c = l.xpath('./p/a/@href').extract_first()
             groupid = re.match(r'/category/(.*)', url_c).group(1)
-            item['groupid'] = groupid
+            # item['groupid'] = groupid
+            item['cateid'] = groupid
 
             req = scrapy.Request(url_base + url, callback=self.parse_details)
             appurl = url_base + url
@@ -123,8 +124,8 @@ class XiaomiSpider(Spider):
 
 
         page_list = page.xpath('//div[@class="intro-titles"]')
-        for l in page_list:
-            item['developer'] = l.xpath('./p/text()').extract_first()#.encode('utf-8')
+        # for l in page_list:
+        item['developer'] = page_list.xpath('./p/text()').extract_first()#.encode('utf-8')
             # print item['developer']
 
         rating_list = page.xpath('//div[@class="star1-empty"]')
@@ -133,20 +134,30 @@ class XiaomiSpider(Spider):
         # print item['rating']
 
         rating_count_link = page.xpath('//span[@class="app-intro-comment"]/text()').extract_first().encode('utf-8')
-        item['count'] = re.findall(r'\d+', rating_count_link)[0]
+        # item['count'] = re.findall(r'\d+', rating_count_link)[0]
+        item['ratingct'] = re.findall(r'\d+', rating_count_link)[0]
+        # print type(item['rating'])
         # print rating_count_link
         # print item['count']
 
         page_list = page.xpath('//ul[@class=" cf"]')
         version_list = page_list.xpath('./li/text()').extract()
         item['version'] = version_list[3]
-        item['update_time'] = version_list[5]
+        # item['update_time'] = version_list[5]
+        item['updatetm'] = version_list[5]
         # print item['version']
         # print item['update_time']
 
+        # item['developerrec'] = developer_recommended
+        # item['relatedrec'] = related_recommended
+        item['developerrec'] = " ".join(developer_recommended)
+        item['relatedrec'] = " ".join(related_recommended)
+
+        print type(item['developerrec'])
+
         # item["recommended"] = recommended
-        item['developer_recommended'] = developer_recommended
-        item['related_recommended'] = related_recommended
+        # item['developer_recommended'] = developer_recommended
+        # item['related_recommended'] = related_recommended
         # print item['developer_recommended']
         # print item['related_recommended']
         # print item['title']
